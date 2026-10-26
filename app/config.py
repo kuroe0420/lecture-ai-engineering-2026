@@ -28,6 +28,8 @@ def get_api_key() -> str:
     if not key:
         raise SystemExit(
             "環境変数 GEMINI_API_KEY が見つかりません。\n"
+            "ローカル：実行するターミナルの環境変数に設定してください。\n"
+            "Codespacesの場合：\n"
             "1. GitHub の Settings → Codespaces → Secrets に GEMINI_API_KEY を登録し、\n"
             "   使う repository に自分の fork を選んでください。\n"
             "2. Codespaces を起動したあとに登録した場合は、Codespaces を再起動してください。\n"
