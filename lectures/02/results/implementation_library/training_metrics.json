@@ -1,0 +1,26 @@
+{
+  "config": {
+    "dataset": "library_faq",
+    "base_model": "Qwen/Qwen3.5-0.8B",
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "seed": 42,
+    "num_train_epochs": 20,
+    "warmup_steps": 6,
+    "lr": 0.0002,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "max_seq_len": 512,
+    "max_new_tokens": 96,
+    "gen": {
+      "do_sample": false
+    }
+  },
+  "training": {
+    "runtime_seconds": 181.8432,
+    "last_logged_loss": 0.01766522228717804,
+    "last_loss_step": 40,
+    "mean_training_loss": 0.43435135260224345,
+    "global_step": 40,
+    "completed_epochs": 20.0
+  }
+}
