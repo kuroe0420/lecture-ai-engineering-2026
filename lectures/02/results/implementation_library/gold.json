@@ -1,0 +1,137 @@
+{
+  "開館と閉館の時刻を知りたいです": {
+    "needs_review": false,
+    "must_include": [
+      "9:00",
+      "18:00"
+    ]
+  },
+  "図書館が開く時間と閉まる時間は？": {
+    "needs_review": false,
+    "must_include": [
+      "9:00",
+      "18:00"
+    ]
+  },
+  "何時から入館できて何時に閉館しますか": {
+    "needs_review": false,
+    "must_include": [
+      "9:00",
+      "18:00"
+    ]
+  },
+  "同時に貸し出してもらえる冊数はいくつですか": {
+    "needs_review": false,
+    "must_include": [
+      "5冊"
+    ]
+  },
+  "一度に借りられる本の数を知りたいです": {
+    "needs_review": false,
+    "must_include": [
+      "5冊"
+    ]
+  },
+  "貸出冊数の上限はいくつですか": {
+    "needs_review": false,
+    "must_include": [
+      "5冊"
+    ]
+  },
+  "返却までに認められる日数は？": {
+    "needs_review": false,
+    "must_include": [
+      "14日間"
+    ]
+  },
+  "通常の貸出は何日間ですか": {
+    "needs_review": false,
+    "must_include": [
+      "14日間"
+    ]
+  },
+  "貸出期間は何日という決まりですか": {
+    "needs_review": false,
+    "must_include": [
+      "14日間"
+    ]
+  },
+  "返す本は何階のどこに持っていけばよいですか": {
+    "needs_review": false,
+    "must_include": [
+      "1階",
+      "受付カウンター"
+    ]
+  },
+  "返却を受け付ける場所はどこですか": {
+    "needs_review": false,
+    "must_include": [
+      "1階",
+      "受付カウンター"
+    ]
+  },
+  "返却の受付は何階にありますか": {
+    "needs_review": false,
+    "must_include": [
+      "1階",
+      "受付カウンター"
+    ]
+  },
+  "借りる期間を延ばす場合の上限は？": {
+    "needs_review": false,
+    "must_include": [
+      "1回",
+      "7日間"
+    ]
+  },
+  "延長の上限回数と延長日数を知りたいです": {
+    "needs_review": false,
+    "must_include": [
+      "1回",
+      "7日間"
+    ]
+  },
+  "貸出期間の延長は最大何回で何日分ですか": {
+    "needs_review": false,
+    "must_include": [
+      "1回",
+      "7日間"
+    ]
+  },
+  "返却が遅れると罰金はいくらかかりますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "貸出中の本は予約できますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "電子書籍を借りることはできますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "休館日は何曜日ですか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "閉館後に使える返却ポストはありますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "貸出延長の申し込みはオンラインでできますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "summary": {
+    "label": "after",
+    "n": 21,
+    "format_rate": 1.0,
+    "content_rate": 0.8571428571428571,
+    "both_rate": 0.8571428571428571,
+    "seconds": 31.2
+  },
+  "rows": [
+    {
+      "question": "開館と閉館の時刻を知りたいです",
+      "raw": "{\"answer\": \"開館時間は9:00〜18:00です。\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": false
+    },
+    {
+      "question": "図書館が開く時間と閉まる時間は？",
+      "raw": "{\"answer\": \"開館時間は9:00〜18:00です。\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": false
+    },
+    {
+      "question": "何時から入館できて何時に閉館しますか",
+      "raw": "{\"answer\": \"開館時間は9:00〜18:00です。\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": false
+    },
+    {
+      "question": "同時に貸し出してもらえる冊数はいくつですか",
+      "raw": "{\"answer\": \"本は一人5冊まで借りられます。\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": false
+    },
+    {
+      "question": "一度に借りられる本の数を知りたいです",
+      "raw": "{\"answer\": \"本は一人5冊まで借りられます。\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": false
+    },
+    {
+      "question": "貸出冊数の上限はいくつですか",
+      "raw": "{\"answer\": \"本は一人5冊まで借りられます。\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": false
+    },
+    {
+      "question": "返却までに認められる日数は？",
+      "raw": "{\"answer\": \"本の返却は1階の受付カウンターで受け付けます。\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": false
+    },
+    {
+      "question": "通常の貸出は何日間ですか",
+      "raw": "{\"answer\": \"本の貸出期間は14日間です。\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": false
+    },
+    {
+      "question": "貸出期間は何日という決まりですか",
+      "raw": "{\"answer\": \"本の貸出期間は14日間です。\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": false
+    },
+    {
+      "question": "返す本は何階のどこに持っていけばよいですか",
+      "raw": "{\"answer\": \"本の返却は1階の受付カウンターで受け付けます。\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": false
+    },
+    {
+      "question": "返却を受け付ける場所はどこですか",
+      "raw": "{\"answer\": \"本の返却は1階の受付カウンターで受け付けます。\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": false
+    },
+    {
+      "question": "返却の受付は何階にありますか",
+      "raw": "{\"answer\": \"本の返却は1階の受付カウンターで受け付けます。\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": false
+    },
+    {
+      "question": "借りる期間を延ばす場合の上限は？",
+      "raw": "{\"answer\": \"貸出延長は1回までで、7日間延長できます。\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": false
+    },
+    {
+      "question": "延長の上限回数と延長日数を知りたいです",
+      "raw": "{\"answer\": \"貸出延長は1回までで、7日間延長できます。\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": false
+    },
+    {
+      "question": "貸出期間の延長は最大何回で何日分ですか",
+      "raw": "{\"answer\": \"貸出延長は1回までで、7日間延長できます。\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": false
+    },
+    {
+      "question": "返却が遅れると罰金はいくらかかりますか",
+      "raw": "{\"answer\": \"この FAQ には記載がありません。担当者に確認が必要です。\", \"needs_review\": true}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": true
+    },
+    {
+      "question": "貸出中の本は予約できますか",
+      "raw": "{\"answer\": \"この FAQ には記載がありません。担当者に確認が必要です。\", \"needs_review\": true}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": true
+    },
+    {
+      "question": "電子書籍を借りることはできますか",
+      "raw": "{\"answer\": \"この FAQ には記載がありません。担当者に確認が必要です。\", \"needs_review\": true}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": true
+    },
+    {
+      "question": "休館日は何曜日ですか",
+      "raw": "{\"answer\": \"開館時間は9:00〜18:00です。\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": true
+    },
+    {
+      "question": "閉館後に使える返却ポストはありますか",
+      "raw": "{\"answer\": \"この FAQ には記載がありません。担当者に確認が必要です。\", \"needs_review\": true}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": true
+    },
+    {
+      "question": "貸出延長の申し込みはオンラインでできますか",
+      "raw": "{\"answer\": \"貸出延長は1回までで、7日間延長できます。\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": true
+    }
+  ]
+}

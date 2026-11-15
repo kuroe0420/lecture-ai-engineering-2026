@@ -1,0 +1,87 @@
+{
+  "config": {
+    "dataset": "library_faq",
+    "base_model": "Qwen/Qwen3.5-0.8B",
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "seed": 42,
+    "num_train_epochs": 20,
+    "warmup_steps": 6,
+    "lr": 0.0002,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "max_seq_len": 512,
+    "max_new_tokens": 96,
+    "gen": {
+      "do_sample": false
+    }
+  },
+  "versions": {
+    "transformers": "5.18.0",
+    "peft": "0.21.1",
+    "trl": "1.14.2",
+    "torch": "2.11.0+cu130"
+  },
+  "method": "LoRA（量子化なし）",
+  "before": {
+    "label": "before",
+    "n": 21,
+    "format_rate": 0.3333333333333333,
+    "content_rate": 0.14285714285714285,
+    "both_rate": 0.14285714285714285,
+    "seconds": 29.1
+  },
+  "after": {
+    "label": "after",
+    "n": 21,
+    "format_rate": 1.0,
+    "content_rate": 0.8571428571428571,
+    "both_rate": 0.8571428571428571,
+    "seconds": 31.2
+  },
+  "regressed": [
+    "返却までに認められる日数は？"
+  ],
+  "knowledge": [
+    {
+      "質問": "館長の名前は何ですか",
+      "FAQ にある": false,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"確認が必要\"}",
+      "学習後の分類": "needs_review",
+      "学習後の出力": "{\"answer\": \"この FAQ には記載がありません。担当者に確認が必要です。\", \"needs_review\": true}"
+    },
+    {
+      "質問": "駐車場は無料で利用できますか",
+      "FAQ にある": false,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"確認が必要\"}",
+      "学習後の分類": "needs_review",
+      "学習後の出力": "{\"answer\": \"この FAQ には記載がありません。担当者に確認が必要です。\", \"needs_review\": true}"
+    },
+    {
+      "質問": "DVDは借りられますか",
+      "FAQ にある": false,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"確認が必要\"}",
+      "学習後の分類": "asserted",
+      "学習後の出力": "{\"answer\": \"DVDは借りられません。\", \"needs_review\": false}"
+    },
+    {
+      "質問": "貸出期間は何日ですか",
+      "FAQ にある": true,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"14日間\"}",
+      "学習後の分類": "asserted",
+      "学習後の出力": "{\"answer\": \"本の貸出期間は14日間です。\", \"needs_review\": false}"
+    }
+  ],
+  "executed_training_myself": true,
+  "training": {
+    "runtime_seconds": 181.8432,
+    "last_logged_loss": 0.01766522228717804,
+    "last_loss_step": 40,
+    "mean_training_loss": 0.43435135260224345,
+    "global_step": 40,
+    "completed_epochs": 20.0
+  }
+}
