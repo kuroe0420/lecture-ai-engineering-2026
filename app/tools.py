@@ -5,11 +5,45 @@
 """
 
 import json
+import random
+from datetime import datetime
 from functools import cache
 from pathlib import Path
+from uuid import uuid4
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 MAX_RESULTS = 3
+LEARNING_LOG_DIR = DATA_DIR.parent / "learning_log"
+
+
+def save_learning_log(lecture: int, content: str) -> str:
+    """学習内容の保存を明示的に頼まれたとき、回の番号と内容を学習ログに保存する。
+
+    lecture は講義の回、content は保存する学習内容。保存前に利用者の承認が必要。
+    """
+    LEARNING_LOG_DIR.mkdir(parents=True, exist_ok=True)
+    now = datetime.now().astimezone()
+    path = LEARNING_LOG_DIR / f"{now:%Y%m%d-%H%M%S-%f}-{uuid4().hex[:8]}.json"
+    data = {"lecture": lecture, "content": content, "saved_at": now.isoformat()}
+    with path.open("x", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    return f"学習ログを保存しました：{path}"
+
+
+def make_quiz(lecture: int) -> str:
+    """指定した回（1始まりの整数）の用語集から、確認問題と答えを1問返す。
+
+    「第2回の内容から確認問題を1問出して」のように、出題を求められたときに使う。
+    lecture には出題する回の番号を指定する。
+    """
+    terms = [entry for entry in load_glossary() if entry["lecture"] == lecture]
+    if not terms:
+        return f"第{lecture}回の用語が見つからないため、確認問題を作れません。"
+    term = random.choice(terms)
+    return json.dumps(
+        {"question": f"「{term['term']}」の意味は？", "answer": term["definition"]},
+        ensure_ascii=False,
+    )
 
 
 @cache
@@ -32,7 +66,7 @@ def search_glossary(query: str) -> str:
     """講座の用語集から用語を検索し、定義と、どの回で扱うかを返す。
 
     AIエンジニアリングの用語や、この講座（AIE2026）に固有の言葉について
-    答える前に使うこと。query には調べたい用語を1つだけ入れる（例: "LoRA"）。
+    答える前に使うこと。query には調べたい用語をまとめて入れる（例: "LoRAとQLoRA"）。
     """
     q = _normalize(query)
     if not q:
