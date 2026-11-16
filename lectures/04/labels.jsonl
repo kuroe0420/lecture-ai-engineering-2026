@@ -1,0 +1,10 @@
+{"id": "01", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": ""}
+{"id": "02", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "fail", "unsure_flag": false, "note": ""}
+{"id": "03", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": ""}
+{"id": "04", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": ""}
+{"id": "05", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": true, "note": ""}
+{"id": "06", "grounding": "pass", "scope": "pass", "hint": "fail", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": "宿題の完成コードをそのまま提示しているため、ヒントは不合格。他の基準は分けて判定。"}
+{"id": "07", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "fail", "unsure_flag": false, "note": "範囲外の質問を適切に断っている。関連する回はないが、回の表示は「第N回」の有無という基準に従い不合格とした。"}
+{"id": "08", "grounding": "pass", "scope": "fail", "hint": "pass", "clarity": "fail", "lecture_mark": "pass", "unsure_flag": true, "note": ""}
+{"id": "09", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "fail", "unsure_flag": true, "note": ""}
+{"id": "10", "grounding": "fail", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": ""}
