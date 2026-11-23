@@ -35,6 +35,7 @@ def test_built_index_can_be_searched(materials, monkeypatch):
     assert result["pages"] == 2  # 第5回の資料は検索対象に含めない
     assert all("章" in text and "ページ" in text for text in texts)
     monkeypatch.setattr(retrieval, "RAG_DB", database)
+    monkeypatch.setattr(retrieval, "RAG_TOP_K", 2)
     monkeypatch.setattr(retrieval, "embed_text", lambda *_: [1, 0])
     hits = retrieval.search("質問")
     assert [h["page_id"] for h in hits] == ["lec01-main-p001", "lec02-main-p001"]
@@ -54,3 +55,19 @@ def test_existing_index_survives_failed_rebuild(materials):
         build_index(source, database, rebuild=True, embedder=embed)
     assert database.read_bytes() == before
     assert not list(database.parent.glob(".rag-build-*"))
+
+
+def test_graph_seed_count_is_independent_of_basic_search(materials, monkeypatch):
+    source, database = materials
+    build_index(source, database, embedder=lambda *_: [1, 0])
+    pages = retrieval.load_pages(source)
+    monkeypatch.setattr(retrieval, "RAG_DB", database)
+    monkeypatch.setattr(retrieval, "RAG_TOP_K", 1)
+    monkeypatch.setattr(retrieval, "GRAPH_START_K", 2)
+    monkeypatch.setattr(retrieval, "load_pages", lambda *_: pages)
+    monkeypatch.setattr(retrieval, "embed_text", lambda *_: [1, 0])
+
+    assert len(retrieval.search("質問")) == 1
+    result = retrieval.search_graph("質問")
+    assert len(result["seeds"]) == 2
+    assert {p["page_id"] for p in result["seeds"]} == {p["page_id"] for p in pages}
