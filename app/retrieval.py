@@ -3,7 +3,6 @@
 import argparse
 import json
 import math
-import re
 import sqlite3
 from contextlib import contextmanager
 from collections import defaultdict, deque
@@ -16,7 +15,8 @@ import sqlite_vec
 
 from app.config import (
     EMBEDDING_DIMENSIONS, EMBEDDING_MAX_TOKENS, EMBEDDING_MODEL,
-    RAG_DB, RAG_DOCUMENT_IDS, RAG_SOURCE, RAG_TOP_K, RAG_TREE, get_api_key,
+    RAG_DB, RAG_DOCUMENT_IDS, RAG_SOURCE, RAG_TOP_K, RAG_TREE, RAG_INCLUDE_NEIGHBORS,
+    TREE_PREVIEW_CHARS, get_api_key,
     RAG_GRAPH, GRAPH_START_K, GRAPH_HOPS, GRAPH_MAX_RESULTS,
 )
 
@@ -50,7 +50,7 @@ def load_pages(source: Path = RAG_SOURCE) -> list[dict]:
 
 
 def browse_tree(node_id: str | None = None) -> dict:
-    """直下のページは先頭文、指定したページ自身は全文を返す。"""
+    """直下のページは本文の冒頭を抜粋し、指定したページ自身は全文を返す。"""
     tree = json.loads(RAG_TREE.read_text(encoding="utf-8"))
     tree["children"] = [node for node in tree["children"] if node["id"] in RAG_DOCUMENT_IDS]
     node_id = node_id or tree["id"]
@@ -61,7 +61,10 @@ def browse_tree(node_id: str | None = None) -> dict:
         if node["kind"] == "page":
             info.update({key: value for key, value in pages[node["id"]].items() if key != "page_id"})
             if not full:
-                info["content"] = re.split(r"(?<=[。！？])|\n", info["content"].strip(), maxsplit=1)[0]
+                text = info["content"].strip()
+                info["content"] = text[:TREE_PREVIEW_CHARS]
+                if len(text) > TREE_PREVIEW_CHARS:
+                    info["content"] += "…"
         return info
 
     remaining = [tree]
@@ -124,8 +127,8 @@ def open_index(path: Path):
         db.close()
 
 
-def search(query: str) -> list[dict]:
-    """質問を埋め込み、近いページを最大RAG_TOP_K件返す。"""
+def search(query: str, *, top_k: int | None = None) -> list[dict]:
+    """質問を埋め込み、指定件数（省略時はRAG_TOP_K）の近いページを返す。"""
     if not isinstance(query, str) or not query.strip():
         raise ValueError("検索語が空です。")
     with open_index(RAG_DB) as db:
@@ -134,8 +137,33 @@ def search(query: str) -> list[dict]:
             SELECT page_id, document_id, lecture, document_title, section, title, page, content,
                    vec_distance_cosine(embedding, ?) AS distance
             FROM chunks ORDER BY distance, page_id LIMIT ?
-        """, (sqlite_vec.serialize_float32(vector), RAG_TOP_K))
+        """, (sqlite_vec.serialize_float32(vector), RAG_TOP_K if top_k is None else top_k))
         return [dict(row) for row in rows]
+
+
+def expand_neighbors(hits: list[dict]) -> list[dict]:
+    """検索結果に同じ資料の前後1ページを加え、重複なく返す。"""
+    pages = {(p["document_id"], p["page"]): p for p in load_pages()}
+    matches = {hit["page_id"]: hit for hit in hits}
+    results, seen = [], set()
+    for hit in hits:
+        for offset in (0, -1, 1):
+            page = pages.get((hit["document_id"], hit["page"] + offset))
+            if page is None or page["page_id"] in seen:
+                continue
+            seen.add(page["page_id"])
+            is_match = page["page_id"] in matches
+            results.append({
+                **matches.get(page["page_id"], page),
+                "retrieval_type": "match" if is_match else "neighbor",
+            })
+    return results
+
+
+def search_with_neighbors(query: str) -> list[dict]:
+    """通常の検索で見つけたページと、その前後1ページの本文を返す。"""
+    hits = search(query)
+    return expand_neighbors(hits) if RAG_INCLUDE_NEIGHBORS else hits
 
 
 def search_graph(query: str) -> dict:
@@ -151,7 +179,8 @@ def search_graph(query: str) -> dict:
             adjacent[a].add(b)
             adjacent[b].add(a)
 
-    seeds = [hit for hit in search(query) if hit["page_id"] in pages][:min(GRAPH_START_K, GRAPH_MAX_RESULTS)]
+    seed_limit = min(GRAPH_START_K, GRAPH_MAX_RESULTS)
+    seeds = [hit for hit in search(query, top_k=seed_limit) if hit["page_id"] in pages][:seed_limit]
     seed_ids = {seed["page_id"] for seed in seeds}
     results, candidates = [], {}
     for rank, seed in enumerate(seeds):
@@ -201,11 +230,15 @@ def run_full_context(agent, question: str, model, instructions: str, prompt_temp
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="エージェントを使わず、講義資料の検索だけを実行する")
     parser.add_argument("query", help="調べたい内容")
+    parser.add_argument("--neighbors", action="store_true", help="検索したページの前後1ページも取得する")
     args = parser.parse_args()
-    for i, result in enumerate(search(args.query), 1):
+    search_fn = search_with_neighbors if args.neighbors else search
+    for i, result in enumerate(search_fn(args.query), 1):
         print(f"\n{'=' * 60}\n検索結果 {i}\n{'=' * 60}")
         print(f"講義: {result['document_title']}")
         print(f"章: {result['section']}")
         print(f"タイトル: {result['title']}")
         print(f"ページ: {result['page']}")
+        if "retrieval_type" in result:
+            print(f"取得方法: {result['retrieval_type']}")
         print(f"\n{result['content']}")
